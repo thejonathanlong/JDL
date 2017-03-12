@@ -1,0 +1,34 @@
+{
+	"tables" : [
+		{
+			"table_name" : "Photos",
+			"properties" : { "photoDestination" : "TEXT NOT NULL", "dateCreated" : "TEXT NOT NULL", "favorite" : "INTEGER"},
+			"keys" : []
+		},
+		{
+			"table_name" : "Albums",
+			"properties" : { "name" : "TEXT NOT NULL UNIQUE", "cover_photo" : "TEXT"},
+			"keys" : []
+		},
+		{
+			"table_name" : "Comments",
+			"properties" : { "description" : "TEXT NOT NULL", "photoID" : "INTEGER NOT NULL"},
+			"keys" : ["FOREIGN KEY(photoID) REFERENCES Photos(ID)"]
+		},
+		{
+			"table_name" : "PhotoAlbum",
+			"properties" : { "photoID" : "INTEGER NOT NULL", "albumID" : "INTEGER NOT NULL"},
+			"keys" : ["FOREIGN KEY(photoID) REFERENCES Photos(ID)", "FOREIGN KEY(albumID) REFERENCES Albums(ID)"]
+		},
+		{
+			"table_name" : "PhotoTag",
+			"properties" : { "tagID" : "INTEGER NOT NULL", "photoID" : "INTEGER NOT NULL"},
+			"keys" : ["FOREIGN KEY(tagID) REFERENCES Tag(ID)", "FOREIGN KEY(photoID) REFERENCES Photos(ID)"]
+		},
+		{
+			"table_name" : "Tag",
+			"properties" : { "name" : "TEXT NOT NULL UNIQUE"},
+			"keys" : []
+		}
+	]
+}
