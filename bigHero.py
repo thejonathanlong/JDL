@@ -1,15 +1,15 @@
 #!flask/bin/python
 import os
-from flask import Flask, request, jsonify, make_response, Response, abort, render_template_string, url_for, redirect, send_from_directory
+from flask import Flask, request, jsonify, make_response, Response, abort, render_template_string, url_for, redirect, send_from_directory, send_file
 from werkzeug import secure_filename
-from Kensing import Kensing
+from Kensing import KensingData
 
 UPLOAD_FOLDER = '/Users/jonathanlong/Documents/Hiro/BigHero-Photos/photo_storage/'
 ALLOWED_EXTENSIONS = set(['tiff', 'png', 'jpg', 'jpeg', 'gif'])
 
 CURRENT_USER = 'jonathan_long'
 app = Flask(__name__)
-database_manager = Kensing()
+database_manager = KensingData(os.path.join(os.getcwd(), 'TestData.json'))
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
@@ -80,6 +80,7 @@ def photos_in_album_bounded(album_name, upperbound, lowerbound=0):
 def photos_in_album_named(album_name):
 	photos = database_manager.get_photos_for_album(album_name)
 	return make_response(jsonify({"Album" : album_name, "Photo" : photos}), 200)
+
 
 ##############
 ##	Albums  ##

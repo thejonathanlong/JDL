@@ -1,9 +1,9 @@
 #!flask/bin/python
-from Kensing import Kensing
+from Kensing import KensingData
 import urllib, cStringIO, sqlite3, os
 import json
 
-k = Kensing(os.path.join(os.getcwd(), 'TestData.json'))
+k = KensingData(os.path.join(os.getcwd(), 'TestData.json'))
 photo_url = os.path.join(os.getcwd(), 'photo_storage/jonathan_long/Climbing90.jpg')
 
 # k.insert_photo(photo_url)
