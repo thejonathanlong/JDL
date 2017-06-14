@@ -43,10 +43,10 @@ class KensingData(FoundationData):
 		return self.select_all(self.ALBUMS_TABLE, condition);
 
 ############################################ Mark: Photo Methods
-	def insert_photo(self, photo_URL, favorite=0):
-		values = {"photoDestination" : photo_URL, "dateCreated" : str(datetime.now()), "favorite" : favorite}
+	def insert_photo(self, photo_URL, thumbnail_url, favorite=0):
+		values = {"photoDestination" : photo_URL, "dateCreated" : str(datetime.now()), "favorite" : favorite, 
+		"photoThumbNail" : thumbnail_url}
 		self.insert_statement(self.PHOTOS_TABLE, values)
-
 
 	def get_photos_for_album(self, name):
 		album_id = self.get_id_for_album(name)
@@ -86,7 +86,7 @@ class KensingData(FoundationData):
 		if include_data:
 			for photo in photos:
 				data = base64.b64encode(open(photo["photoDestination"]).read())
-				photo['photo_data'] = data
+				photo['photoData'] = data
 				photo['photoDestination'] = 'redacted'
 		return photos
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5631724C1EE30D3E0074D3A9 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5631724B1EE30D3E0074D3A9 /* Models.swift */; };
+		567124C41EE66B4E0062A920 /* PhotoUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567124C31EE66B4E0062A920 /* PhotoUploadViewController.swift */; };
 		56C54BFF1EE27C31004577C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C54BFE1EE27C31004577C2 /* AppDelegate.swift */; };
 		56C54C011EE27C31004577C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C54C001EE27C31004577C2 /* ViewController.swift */; };
 		56C54C041EE27C31004577C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56C54C021EE27C31004577C2 /* Main.storyboard */; };
@@ -14,6 +16,9 @@
 		56C54C091EE27C31004577C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56C54C071EE27C31004577C2 /* LaunchScreen.storyboard */; };
 		56C54C141EE27C32004577C2 /* JDLPhotographyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C54C131EE27C32004577C2 /* JDLPhotographyTests.swift */; };
 		56C54C1F1EE27C32004577C2 /* JDLPhotographyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C54C1E1EE27C32004577C2 /* JDLPhotographyUITests.swift */; };
+		56C54C2D1EE27DB8004577C2 /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C54C2C1EE27DB8004577C2 /* PhotosCollectionViewController.swift */; };
+		56C54C321EE27E8F004577C2 /* BigHeroDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C54C311EE27E8F004577C2 /* BigHeroDataManager.swift */; };
+		56C54C341EE28592004577C2 /* NetworkDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C54C331EE28592004577C2 /* NetworkDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5631724B1EE30D3E0074D3A9 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		567124C31EE66B4E0062A920 /* PhotoUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoUploadViewController.swift; sourceTree = "<group>"; };
 		56C54BFB1EE27C31004577C2 /* JDLPhotography.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JDLPhotography.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56C54BFE1EE27C31004577C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56C54C001EE27C31004577C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +54,9 @@
 		56C54C1A1EE27C32004577C2 /* JDLPhotographyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JDLPhotographyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56C54C1E1EE27C32004577C2 /* JDLPhotographyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDLPhotographyUITests.swift; sourceTree = "<group>"; };
 		56C54C201EE27C32004577C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56C54C2C1EE27DB8004577C2 /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		56C54C311EE27E8F004577C2 /* BigHeroDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigHeroDataManager.swift; sourceTree = "<group>"; };
+		56C54C331EE28592004577C2 /* NetworkDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +107,9 @@
 		56C54BFD1EE27C31004577C2 /* JDLPhotography */ = {
 			isa = PBXGroup;
 			children = (
-				56C54BFE1EE27C31004577C2 /* AppDelegate.swift */,
-				56C54C001EE27C31004577C2 /* ViewController.swift */,
-				56C54C021EE27C31004577C2 /* Main.storyboard */,
-				56C54C051EE27C31004577C2 /* Assets.xcassets */,
-				56C54C071EE27C31004577C2 /* LaunchScreen.storyboard */,
-				56C54C0A1EE27C31004577C2 /* Info.plist */,
+				56C54C301EE27E56004577C2 /* Objects */,
+				56C54C2F1EE27DD4004577C2 /* Other */,
+				56C54C2E1EE27DC1004577C2 /* ViewControllers */,
 			);
 			path = JDLPhotography;
 			sourceTree = "<group>";
@@ -123,6 +130,38 @@
 				56C54C201EE27C32004577C2 /* Info.plist */,
 			);
 			path = JDLPhotographyUITests;
+			sourceTree = "<group>";
+		};
+		56C54C2E1EE27DC1004577C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				56C54C001EE27C31004577C2 /* ViewController.swift */,
+				56C54C2C1EE27DB8004577C2 /* PhotosCollectionViewController.swift */,
+				567124C31EE66B4E0062A920 /* PhotoUploadViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		56C54C2F1EE27DD4004577C2 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				56C54BFE1EE27C31004577C2 /* AppDelegate.swift */,
+				56C54C021EE27C31004577C2 /* Main.storyboard */,
+				56C54C051EE27C31004577C2 /* Assets.xcassets */,
+				56C54C071EE27C31004577C2 /* LaunchScreen.storyboard */,
+				56C54C0A1EE27C31004577C2 /* Info.plist */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		56C54C301EE27E56004577C2 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				56C54C331EE28592004577C2 /* NetworkDataManager.swift */,
+				56C54C311EE27E8F004577C2 /* BigHeroDataManager.swift */,
+				5631724B1EE30D3E0074D3A9 /* Models.swift */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +298,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56C54C321EE27E8F004577C2 /* BigHeroDataManager.swift in Sources */,
+				56C54C341EE28592004577C2 /* NetworkDataManager.swift in Sources */,
+				56C54C2D1EE27DB8004577C2 /* PhotosCollectionViewController.swift in Sources */,
+				567124C41EE66B4E0062A920 /* PhotoUploadViewController.swift in Sources */,
+				5631724C1EE30D3E0074D3A9 /* Models.swift in Sources */,
 				56C54C011EE27C31004577C2 /* ViewController.swift in Sources */,
 				56C54BFF1EE27C31004577C2 /* AppDelegate.swift in Sources */,
 			);
@@ -507,6 +551,7 @@
 				56C54C251EE27C32004577C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		56C54C261EE27C32004577C2 /* Build configuration list for PBXNativeTarget "JDLPhotographyTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +560,7 @@
 				56C54C281EE27C32004577C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		56C54C291EE27C32004577C2 /* Build configuration list for PBXNativeTarget "JDLPhotographyUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +569,7 @@
 				56C54C2B1EE27C32004577C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
