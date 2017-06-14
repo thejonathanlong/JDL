@@ -1,10 +1,12 @@
 #!flask/bin/python
-import os
+import os, threading
 from flask import Flask, request, jsonify, make_response, Response, abort, render_template_string, url_for, redirect, send_from_directory, send_file
 from werkzeug import secure_filename
 from Kensing import KensingData
+from PIL import Image
 
-UPLOAD_FOLDER = '/Users/jonathanlong/Documents/Hiro/BigHero-Photos/photo_storage/'
+
+UPLOAD_FOLDER =  os.path.dirname(os.path.realpath(__file__)) + '/photo_storage/'
 ALLOWED_EXTENSIONS = set(['tiff', 'png', 'jpg', 'jpeg', 'gif'])
 
 CURRENT_USER = 'jonathan_long'
@@ -36,10 +38,32 @@ def photos():
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			photo_url = os.path.join(os.path.join(app.config['UPLOAD_FOLDER'], CURRENT_USER), filename)
-			file.save(photo_url)
-			database_manager.insert_photo(filename)
-			# database_manager.save()
-			return redirect(url_for('photo_named', filename=str(filename)))
+			thumbnail_file = save_photo_thumbnail(str(photo_url))
+			# Create the thumbnail
+			# t = threading.Thread(target=save_photo_thumbnail, args=(str(photo_url),))
+    		# t.start()
+    		file.save(photo_url)
+    		database_manager.insert_photo(filename, thumbnail_url)
+    		return redirect(url_for('photo_named', filename=str(filename)))
+
+THUMBNAIL_MAX_SIZE = (320, 180)
+def save_photo_thumbnail(original_file):
+	print("original_file " + str(original_file))
+	thumbnail_file = original_file.split(".")[0] + "thumbnail." + original_file.split(".")[1]
+	print("thumbnail_file " + str(thumbnail_file))
+	if original_file != thumbnail_file:
+		# try:
+		img = Image.open(original_file)
+		print(str(img))
+		img_width = img.size[0]
+		img_height = img.size[0]
+		thumbnail_size = (img_width * 0.25,  img_height * 0.25)
+		print(str(thumbnail_size))
+		img.thumbnail(thumbnail_size)
+		img.save(thumbnail_file)
+		# except IOError:
+		print "cannot create thumbnail for", original_file
+		return thumbnail_file
 
 @app.route('/api/v1/photo/<filename>', methods=['GET'])
 def photo_named(filename):
@@ -71,7 +95,7 @@ def bounded_photos(upperbound, lowerbound=0):
 def photo_for_URL(url):
 	# url = args.get('url')
 	photo = database_manager.photo_for_URL(url)
-	return make_response(jsonify({"photo" : photo}), 200)
+	return make_response(jsonify({"photos" : photo}), 200)
 
 def photos_in_album_bounded(album_name, upperbound, lowerbound=0):
 	photos = database_manager.get_bounded_photos_in_album(album_name, upperbound, lowerbound)

@@ -8,18 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+var photosObserver = 1234
 
+class ViewController: UIViewController {
+	
+	@IBOutlet weak var imageView: UIImageView!
+	
+	let dataManager = BigHeroDataManager()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		dataManager.downloadPhotos { (photos) in
+			DispatchQueue.main.async {
+				self.imageView.image = photos.first?.image
+			}
+		}
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
 
 }
 
