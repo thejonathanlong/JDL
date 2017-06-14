@@ -2,7 +2,7 @@ from JLFoundationData import FoundationData
 from datetime import datetime
 import os, base64
 
-class KensingData(FoundationData):
+class BHData(FoundationData):
 	#############
 	#Table Names#
 	#############
@@ -45,7 +45,7 @@ class KensingData(FoundationData):
 ############################################ Mark: Photo Methods
 	def insert_photo(self, photo_URL, thumbnail_url, favorite=0):
 		values = {"photoDestination" : photo_URL, "dateCreated" : str(datetime.now()), "favorite" : favorite, 
-		"photoThumbNail" : thumbnail_url}
+		"photoThumbnail" : thumbnail_url}
 		self.insert_statement(self.PHOTOS_TABLE, values)
 
 	def get_photos_for_album(self, name):
@@ -81,13 +81,18 @@ class KensingData(FoundationData):
 		condition = 'id=' + str(photoID)
 		return self.select_all_photos(condition)
 
-	def select_all_photos(self, condition=None, second_table_name = None, join_on_statement=None, upperbound=None, lowerbound=0, include_data=True):
+	def select_all_photos(self, condition=None, second_table_name = None, join_on_statement=None, upperbound=None, lowerbound=0, include_thumbnail_data=True, include_raw_data=False):
+		include_raw_data = True if upperbound - lowerbound == 1 else include_raw_data
+		include_thumbnail_data = False if upperbound - lowerbound == 1 else include_thumbnail_data
+		
 		photos = self.select_all(self.PHOTOS_TABLE, condition, second_table_name, join_on_statement, upperbound, lowerbound)
-		if include_data:
+		if include_raw_data or include_thumbnail_data:
 			for photo in photos:
-				data = base64.b64encode(open(photo["photoDestination"]).read())
-				photo['photoData'] = data
+				data = base64.b64encode(open(photo["photoDestination" if include_raw_data else "photoThumbnail"]).read()) 
+				photo['photoData' if include_raw_data else 'photoThumbnailData'] = data
 				photo['photoDestination'] = 'redacted'
+				photo['photoThumbnail'] = 'redacted'
+
 		return photos
 
 	def get_all_favorites(self):

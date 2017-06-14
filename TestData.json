@@ -2,7 +2,7 @@
 	"tables" : [
 		{
 			"table_name" : "Photos",
-			"properties" : { "photoDestination" : "TEXT NOT NULL", "dateCreated" : "TEXT NOT NULL", "favorite" : "INTEGER", "photoThumbNail" : "TEXT NOT NULL"},
+			"properties" : { "photoDestination" : "TEXT NOT NULL", "photoThumbnail" : "TEXT NOT NULL", "dateCreated" : "TEXT NOT NULL", "favorite" : "INTEGER"},
 			"keys" : []
 		},
 		{

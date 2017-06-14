@@ -2,8 +2,9 @@
 import os, threading
 from flask import Flask, request, jsonify, make_response, Response, abort, render_template_string, url_for, redirect, send_from_directory, send_file
 from werkzeug import secure_filename
-from Kensing import KensingData
+from BHData import BHData
 from PIL import Image
+from JELPrettyPrint import JELPrettyPrint as printer
 
 
 UPLOAD_FOLDER =  os.path.dirname(os.path.realpath(__file__)) + '/photo_storage/'
@@ -11,7 +12,7 @@ ALLOWED_EXTENSIONS = set(['tiff', 'png', 'jpg', 'jpeg', 'gif'])
 
 CURRENT_USER = 'jonathan_long'
 app = Flask(__name__)
-database_manager = KensingData(os.path.join(os.getcwd(), 'TestData.json'))
+database_manager = BHData(os.path.join(os.getcwd(), 'TestData.json'))
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
@@ -25,11 +26,11 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route('/api/v1/photos', methods=['POST'])
 ##
 # Test with Curl
-# curl -X POST -F "photo=@shot.png" http://127.0.0.1:5000/api/v1/photos #
+# curl -X POST -F "photo=@shot.png" http://127.0.0.1:5000/api/v1/photos
 ##
+@app.route('/api/v1/photos', methods=['POST'])
 def photos():
 	if request.method == 'POST':
 		if not os.path.exists(UPLOAD_FOLDER + CURRENT_USER):
@@ -38,32 +39,24 @@ def photos():
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			photo_url = os.path.join(os.path.join(app.config['UPLOAD_FOLDER'], CURRENT_USER), filename)
-			thumbnail_file = save_photo_thumbnail(str(photo_url))
-			# Create the thumbnail
-			# t = threading.Thread(target=save_photo_thumbnail, args=(str(photo_url),))
-    		# t.start()
+			thumbnail_url = save_photo_thumbnail(str(photo_url))
     		file.save(photo_url)
-    		database_manager.insert_photo(filename, thumbnail_url)
+    		database_manager.insert_photo(photo_url, thumbnail_url)
     		return redirect(url_for('photo_named', filename=str(filename)))
 
 THUMBNAIL_MAX_SIZE = (320, 180)
 def save_photo_thumbnail(original_file):
-	print("original_file " + str(original_file))
 	thumbnail_file = original_file.split(".")[0] + "thumbnail." + original_file.split(".")[1]
-	print("thumbnail_file " + str(thumbnail_file))
 	if original_file != thumbnail_file:
-		# try:
 		img = Image.open(original_file)
-		print(str(img))
 		img_width = img.size[0]
 		img_height = img.size[0]
 		thumbnail_size = (img_width * 0.25,  img_height * 0.25)
-		print(str(thumbnail_size))
+		printer.pretty_print("thumnail size: " + str(thumbnail_size))
 		img.thumbnail(thumbnail_size)
 		img.save(thumbnail_file)
-		# except IOError:
-		print "cannot create thumbnail for", original_file
-		return thumbnail_file
+		printer.pretty_print("thumbnail_file: " + str(thumbnail_file))
+	return thumbnail_file
 
 @app.route('/api/v1/photo/<filename>', methods=['GET'])
 def photo_named(filename):

@@ -20,7 +20,8 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		dataManager.downloadPhotos { (photos) in
 			DispatchQueue.main.async {
-				self.imageView.image = photos.first?.image
+				self.imageView.image = photos.first?.thumbnailImage
+				print("Image size: (\(String(describing: self.imageView.image?.size.width)), \(String(describing: self.imageView.image?.size.height)))");
 			}
 		}
 	}
